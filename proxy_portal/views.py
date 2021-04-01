@@ -1,9 +1,11 @@
+from datetime import datetime
+
 from django.forms import Textarea, DateTimeField
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from django.shortcuts import render
 
 # Create your views here.
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, DetailView
 from .models import ProxyList
 
 
@@ -13,12 +15,13 @@ class HomePageView(ListView):
     context_object_name = 'all_proxy_list'
 
 
-class AddPageView(CreateView):
-    model = ProxyList
-    template_name = 'add.html'
-    fields = ['project', 'proxy_port_out', 'proxy_name', 'fp_name',
-              'author', 'stop_date', 'start_date']
+def login_view(request):
+    if request.POST:
+        form_data = request.POST.dict()
+    date_now = datetime.now()
+    formated_date = date_now.strftime("%d.%m.%Y %H:%M")
 
+    return render(request, "add.html", {'formated_date': formated_date})
 
 class EditView(ListView):
     model = ProxyList
