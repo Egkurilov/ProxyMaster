@@ -5,8 +5,8 @@
     <script src="{% static 'jquery.inputmask.js' %}"></script>
     <script src="{% static 'inputmask.date.extensions.js' %}"></script>
         <script>$(function() {$('#datetime').inputmask('datetime', {
-        mask: "1.2.y h:s",
-        alias: "dd.mm.yyyy",
+        mask: "y.1.2 h:s",
+        alias: "yyyy.mm.dd",
         placeholder: "{{ formated_date }}",
         separator: '.',
         clearMaskOnLostFocus: false,
