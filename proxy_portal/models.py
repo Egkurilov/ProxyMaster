@@ -13,18 +13,6 @@ class ProjectList(models.Model):
 
 
 class ProxyList(models.Model):
-    def __init__(self):
-        proxy_id = 1
-        project_id = 1
-        proxy_port_in = 1
-        proxy_port_out = 1
-        proxy_name = 5
-        fp_name = 4
-        author = 3
-        stop_date = 1
-        start_date = 1
-        status = 1
-
     id = models.AutoField(primary_key=True)
     proxy_id = models.IntegerField(default=1)
     project = models.ForeignKey(ProjectList, on_delete=models.CASCADE)
@@ -33,10 +21,10 @@ class ProxyList(models.Model):
     proxy_name = models.CharField(max_length=255)
     fp_name = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
-    stop_date = models.CharField(max_length=255)
-    start_date = models.CharField(max_length=255)
+    stop_date = models.DateTimeField()
+    start_date = models.DateTimeField()
     proxy_pid = models.IntegerField(default=1)
-    status = models.BooleanField
+    status = models.BooleanField(default=0)
 
     def __str__(self):
         return self.proxy_name[:50]
