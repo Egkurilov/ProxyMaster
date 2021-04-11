@@ -17,7 +17,7 @@ class ProxyList(models.Model):
     proxy_id = models.IntegerField(default=1)
     project = models.ForeignKey(ProjectList, on_delete=models.CASCADE)
     proxy_port_in = models.IntegerField(validators=[MinValueValidator(32000), MaxValueValidator(34000)])
-    proxy_port_out = models.IntegerField(default=32000)
+    proxy_port_out = models.CharField(max_length=255)
     proxy_name = models.CharField(max_length=255)
     fp_name = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
