@@ -41,8 +41,8 @@
 												<td>{{ proxy.project }}</td>
 												<td>{{ proxy.author }}</td>
 												<td>{{ proxy.proxy_port_out }}</td>
-												<td>{{ proxy.stop_date }}</td>
-												<td>{{ proxy.start_date }}</td>
+												<td>{{ proxy.stop_date|date:"d/m/Y h:m" }}</td>
+												<td>{{ proxy.start_date|date:"d/m/Y h:m" }}</td>
 												<td>{{ proxy.status }}</td>
                                                 <td>
                                                     <div class="btn-group" role="group">

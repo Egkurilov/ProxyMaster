@@ -115,6 +115,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+DATETIME_FORMAT = "d M Y H:i:s"
 DATE_INPUT_FORMATS = ( "%d/%m/%Y %H:%M", )
 DATETIME_INPUT_FORMATS = ( "%d/%m/%Y %H:%M", )
 # Static files (CSS, JavaScript, Images)
