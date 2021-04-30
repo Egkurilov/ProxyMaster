@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 ROOT_URLCONF = 'ProxyMaster.urls'
 
 TEMPLATES = [
@@ -109,11 +110,12 @@ LANGUAGE_CODE = 'ru-ru'
 
 
 TIME_ZONE = 'Europe/Moscow'
+
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 DATETIME_FORMAT = "d M Y H:i:s"
 DATE_INPUT_FORMATS = ( "%d/%m/%Y %H:%M", )
@@ -122,3 +124,5 @@ DATETIME_INPUT_FORMATS = ( "%d/%m/%Y %H:%M", )
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
