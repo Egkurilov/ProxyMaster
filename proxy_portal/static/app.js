@@ -4,23 +4,26 @@ $(document).ready(function() {
         "columnDefs": [
             { "visible": false, "targets": groupColumn }
         ],
+        "bInfo" : false,
+        //"bLengthChange" : false,
         "order": [[ groupColumn, 'asc' ]],
-        "lengthMenu": [ [50, 75, 100, -1], [50, 75, 100, "All"] ],
+        "pageLength": 50,
+        "lengthMenu": [[50, 75, 100, -1], [50, 75, 100, "All"]],
         "columns": [
             null,
             null,
             null,
+            {"width": "0px"},
+            {"width": "0px"},
             null,
-            {"width": "100px"},
-            null,
-            null,
-            null,
+            {"width": "120px"},
+            {"width": "120px"},
             null,
             null,
         ],
         columnDefs: [{
 		"render": function(data, type, row) {
-			return(data == 'False' ? "DOWN" : "UP");
+			return(data == 'False' ? "<span class='text-danger'>DOWN</span>" : "<span class='text-success'>UP</span>");
 		},
 		"targets": 8
 	}],

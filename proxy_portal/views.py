@@ -18,6 +18,9 @@ class HomePageView(ListView):
     context_object_name = 'all_proxy_list'
 
 
+def add_view(request):
+    return render(request, "add.html")
+
 def main_view(request):
     proxylist = ProxyList()
     if request.POST:

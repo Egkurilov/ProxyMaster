@@ -4,78 +4,103 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-  <link rel="stylesheet"  href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
+  <link rel="stylesheet"  href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
   <link rel="stylesheet"  href="/static/style.css">
   <script src="static/app.js"></script>
 </head>
-<body>
+<body class="bg-light">
 
-<div class="container" style="width: 100%; max-width: 100%">
- 									<table class="table table-striped- table-bordered table-hover table-checkable" id="index-table">
+<div class="container py-3" style="max-width: 60%">
 
-                                        <thead>
-											<tr>
-												<th>Входящий порт</th>
-												<th>Имя прокси</th>
-												<th>Код подсистемы</th>
-												<th>Имя подсистемы</th>
-												<th>Автор</th>
-												<th>Исходящий порт</th>
-												<th>Дата останова</th>
-												<th>Дата Старта</th>
-												<th>Статус</th>
-												<th>Команды</th>
-											</tr>
-										</thead>
-										<tbody>
-                                        {% block content %}
-                                        {% for proxy in all_proxy_list %}
-											<tr>
-												<td>{{ proxy.proxy_port_in }}</td>
-												<td>{{ proxy.proxy_name }}</td>
-												<td>{{ proxy.fp_name }}</td>
-												<td>{{ proxy.project }}</td>
-												<td>{{ proxy.author }}</td>
-												<td>{{ proxy.proxy_port_out }}</td>
-												<td>{{ proxy.stop_date|date:"d/m/Y H:i" }}</td>
-												<td>{{ proxy.start_date|date:"d/m/Y H:i" }}</td>
-												<td>{{ proxy.status }}</td>
-                                                <td>
-                                                    <div class="btn-group" role="group">
-                                                 <a href="/start/{{ proxy.id }}" class="btn-sm btn btn-success"  role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
-  <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
-</svg></a> <br>
-                                                 <a href="/edit/{{ proxy.id }}" class="btn-sm btn btn-warning" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-</svg></a> <br>
-                                                 <a href="/stop/{{ proxy.id }}" class="btn-sm btn btn-danger" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stop-fill" viewBox="0 0 16 16">
-  <path d="M5 3.5h6A1.5 1.5 0 0 1 12.5 5v6a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 11V5A1.5 1.5 0 0 1 5 3.5z"/>
-</svg></a>
-                                                    </div>
-												</td>
-											</tr>
-                                        {% endfor %}
-                                    {% endblock %}
-										</tbody>
-										<tfoot>
-											<tr>
-												<th>Входящий порт</th>
-                                                <th>Имя прокси</th>
-												<th>Код подсистемы</th>
-												<th>Имя подсистемы</th>
-												<th>Автор</th>
-												<th>Исходящий порт</th>
-												<th>Дата останова</th>
-												<th>Дата Старта</th>
-												<th>Статус</th>
-												<th>Команды</th>
-											</tr>
-										</tfoot>
-									</table>
+    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-layers me-2" viewBox="0 0 16 16">
+          <path d="M8.235 1.559a.5.5 0 0 0-.47 0l-7.5 4a.5.5 0 0 0 0 .882L3.188 8 .264 9.559a.5.5 0 0 0 0 .882l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.882L12.813 8l2.922-1.559a.5.5 0 0 0 0-.882l-7.5-4zm3.515 7.008L14.438 10 8 13.433 1.562 10 4.25 8.567l3.515 1.874a.5.5 0 0 0 .47 0l3.515-1.874zM8 9.433 1.562 6 8 2.567 14.438 6 8 9.433z"/>
+        </svg>
+        <span class="fs-4">Proxy Portal</span>
+      </a>
+
+      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <a class="me-3 py-2 text-dark text-decoration-none" href="#">Ссылка</a>
+<!--         <a class="me-3 py-2 text-dark text-decoration-none" href="#">Enterprise</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="#">Support</a>
+        <a class="py-2 text-dark text-decoration-none" href="#">Pricing</a> -->
+      </nav>
+    </div>
+
+	<table class="table table-striped- table-bordered table-hover table-checkable" id="index-table">
+
+    <thead>
+		<tr>
+			<th>Входящий порт</th>
+			<th>Имя прокси</th>
+			<th>Код подсистемы</th>
+			<th class="d-none">Имя подсистемы</th>
+			<th class="d-none">Автор</th>
+			<th>Исходящий порт</th>
+			<th>Дата останова</th>
+			<th>Дата Старта</th>
+			<th>Статус</th>
+			<th>Команды</th>
+		</tr>
+	</thead>
+	<tbody>
+    {% block content %}
+    {% for proxy in all_proxy_list %}
+		<tr class="text-center">
+			<td>{{ proxy.proxy_port_in }}</td>
+			<td>{{ proxy.proxy_name }}</td>
+			<td>{{ proxy.fp_name }}</td>
+			<td class="d-none">{{ proxy.project }}</td>
+			<td class="d-none">{{ proxy.author }}</td>
+			<td>{{ proxy.proxy_port_out }}</td>
+			<td>{{ proxy.stop_date|date:"d/m/Y H:i" }}</td>
+			<td>{{ proxy.start_date|date:"d/m/Y H:i" }}</td>
+			<td>{{ proxy.status }}</td>
+            <td>
+                <div class="btn-group" role="group">
+                    <a href="/start/{{ proxy.id }}" class="btn-sm btn btn-success"  role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
+                            <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                        </svg>
+                    </a>
+                    <a href="/edit/{{ proxy.id }}" class="btn-sm btn btn-warning" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                        </svg>
+                    </a>
+                    <a href="/stop/{{ proxy.id }}" class="btn-sm btn btn-danger" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stop-fill" viewBox="0 0 16 16">
+                            <path d="M5 3.5h6A1.5 1.5 0 0 1 12.5 5v6a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 11V5A1.5 1.5 0 0 1 5 3.5z"/>
+                        </svg>
+                    </a>
+                </div>
+			</td>
+		</tr>
+    {% endfor %}
+{% endblock %}
+	</tbody>
+	<tfoot>
+		<tr>
+			<th>Входящий порт</th>
+            <th>Имя прокси</th>
+			<th>Код подсистемы</th>
+			<th class="d-none">Имя подсистемы</th>
+			<th class="d-none">Автор</th>
+			<th>Исходящий порт</th>
+			<th>Дата останова</th>
+			<th>Дата Старта</th>
+			<th>Статус</th>
+			<th>Команды</th>
+		</tr>
+	</tfoot>
+</table>
 </div>
 <div>
 </div>

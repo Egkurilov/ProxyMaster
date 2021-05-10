@@ -1,24 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{% static 'jquery.inputmask.js' %}"></script>
-    <script src="{% static 'inputmask.date.extensions.js' %}"></script>
-        <script>$(function() {$('#datetime').inputmask('datetime', {
-        mask: "y.1.2 h:s",
-        alias: "yyyy.mm.dd",
-        placeholder: "{{ formated_date }}",
-        separator: '.',
-        clearMaskOnLostFocus: false,
-        hourFormat: "24",
-        leapday: "29.02."
-    });});</script>
 
   <h1>New post</h1>
-    <form action="" method="post">{% csrf_token %}
 
-        <input type="text" id="datetime" name="form_data">
-
-      <input type="submit" value="Save" />
-    </form>
 {% endblock content %}
