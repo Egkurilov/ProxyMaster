@@ -4,13 +4,16 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+
   <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
   <link rel="stylesheet"  href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
+  <script src="static/jquery.inputmask.js"></script>
+  <script src="static/inputmask.date.extensions.js"></script>
   <link rel="stylesheet"  href="/static/style.css">
   <script src="static/app.js"></script>
 </head>
@@ -27,7 +30,9 @@
       </a>
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 text-dark text-decoration-none" href="#">Ссылка</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#add_entry" href="#">ADD Entry</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#add_project" href="#">ADD Project</a>
+
 <!--         <a class="me-3 py-2 text-dark text-decoration-none" href="#">Enterprise</a>
         <a class="me-3 py-2 text-dark text-decoration-none" href="#">Support</a>
         <a class="py-2 text-dark text-decoration-none" href="#">Pricing</a> -->
@@ -60,8 +65,8 @@
 			<td class="d-none">{{ proxy.project }}</td>
 			<td class="d-none">{{ proxy.author }}</td>
 			<td>{{ proxy.proxy_port_out }}</td>
-			<td>{{ proxy.stop_date|date:"d/m/Y H:i" }}</td>
-			<td>{{ proxy.start_date|date:"d/m/Y H:i" }}</td>
+			<td>{{ proxy.stop_date|date:"d.m.Y H:i" }}</td>
+			<td>{{ proxy.start_date|date:"d.m.Y H:i" }}</td>
 			<td>{{ proxy.status }}</td>
             <td>
                 <div class="btn-group" role="group">
@@ -112,5 +117,81 @@
     <a href="/delete" class="btn btn-danger" role="button">Delete record</a>
 </left>
 {% endcomment %}
+
+    <form action="/add_entry/" method="post">
+        {% csrf_token %}
+
+        <div class="modal fade" id="add_entry" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+
+              <div class="mb-3">
+                <label for="proxy_name_input" class="form-label">Имя прокси</label>
+                <input type="text" class="form-control" id="proxy_name_input" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="fp_name_input" class="form-label">Код подсистемы</label>
+                <input type="text" class="form-control" id="fp_name_input" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="proxy_port_out_input" class="form-label">Исходящий Host:Port</label>
+                <input type="text" class="form-control" id="proxy_port_out_input" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="stop_date_input" class="form-label">Дата останова</label>
+                <input type="text" class="form-control" id="stop_date_input" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="start_date_input" class="form-label">Дата старта</label>
+                <input type="text" class="form-control" id="start_date_input" aria-describedby="emailHelp">
+              </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </form>
+
+
+
+  <form action="/add_project/" method="post">
+        {% csrf_token %}
+
+        <div class="modal fade" id="add_project" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+              <div class="mb-3">
+                <label for="project_name" class="form-label">Имя проекта</label>
+                <input type="text" class="form-control" id="project_name" aria-describedby="emailHelp">
+              </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </form>
 </body>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </html>

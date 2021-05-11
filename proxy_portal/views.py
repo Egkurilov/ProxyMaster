@@ -17,10 +17,6 @@ class HomePageView(ListView):
 
     context_object_name = 'all_proxy_list'
 
-
-def add_view(request):
-    return render(request, "add.html")
-
 def main_view(request):
     proxylist = ProxyList()
     if request.POST:
@@ -29,7 +25,7 @@ def main_view(request):
     date_now = datetime.now()
     formated_date = date_now.strftime("%Y.%m.%d %H:%M")
 
-    return render(request, "add.html", {'formated_date': formated_date})
+    return render(request, "add_entry.html", {'formated_date': formated_date})
 
 
 def start_proxy(request, pk):
@@ -46,7 +42,7 @@ def stop_proxy(request, pk):
     proxy_kill(str(query_result[0]['proxy_pid']))
 
     ProxyList.objects.values().filter(id=pk).update(proxy_pid=0, status=False)
-    #ProxyList.objects.filter(id=pk).update(status=False)
+    # ProxyList.objects.filter(id=pk).update(status=False)
     return redirect('home')
 
 
@@ -59,6 +55,18 @@ def edit_proxy(request, pk):
         'query_result': query_result,
     }
     return HttpResponse(template.render(context))
+
+
+def add_entry_view(request):
+    if request.POST:
+        print("POST")
+    return redirect('home')
+
+
+def add_project_view(request):
+    if request.POST:
+        print("POST")
+    return redirect('home')
 
 
 class DelPageView(ListView):

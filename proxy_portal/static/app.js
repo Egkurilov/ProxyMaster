@@ -44,7 +44,14 @@ $(document).ready(function() {
             } );
         }
     } );
-
+$('#start_date_input, #stop_date_input').inputmask('datetime', {
+        mask: "1.2.y h:s",
+        alias: "dd.mm.yyyy",
+        placeholder: "ДД.ММ.ГГГГ ЧЧ:ММ",
+        separator: '.',
+        hourFormat: "24",
+        leapday: "29.02."
+    });
     // Order by the grouping
     $('#index-table tbody').on( 'click', 'tr.group', function () {
         var currentOrder = table.order()[0];
