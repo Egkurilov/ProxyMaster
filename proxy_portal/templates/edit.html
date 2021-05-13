@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
+{% include "header.html" %}
+
 <body>
 
 <div class="container">
-  <p>edit page:</p>
+{% include "menu.html" %}
         <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_1">
                 <br>
             <thead>
@@ -24,9 +16,27 @@
                     {% block content %}
                     {% for proxy in query_result %}
                 <form action="">
-                  <tr> <td> <label for="proxy_port_in">ID :</label></td> <td><input type="text" id="id" name="id" value="{{ proxy.id }}" readonly><br></td> </tr>
-                  <tr> <td> <label for="proxy_port_in">Входящий порт:</label></td> <td><input type="text" id="proxy_port_in" name="proxy_port_in" value="{{ proxy.proxy_port_in }}" readonly><br></td> </tr>
-                  <tr> <td> <label for="proxy_name">Код подсистемы:</label></td> <td><input type="text" id="proxy_name" name="proxy_name" value="{{ proxy.proxy_name }}"><br><br></td> </tr>
+
+              <div class="mb-3">
+                <label for="fp_name_input" class="form-label">Входящий порт</label>
+                <input type="text" class="form-control"  name="proxy_port_in_input" id="proxy_port_in_input" aria-describedby="emailHelp" value="{{ proxy.proxy_port_in }}" readonly>
+              </div>
+
+              <div class="mb-3">
+                <label for="fp_name_input" class="form-label">Имя прокси</label>
+                <input type="text" class="form-control"  name="proxy_port_in_input" id="proxy_port_in_input" aria-describedby="emailHelp" value="{{ proxy.proxy_name }}">
+              </div>
+
+              <div class="mb-3">
+                <label for="fp_name_input" class="form-label">Дата останова</label>
+                <input type="text" class="form-control"  name="stop_date_input" id="stop_date_input" aria-describedby="emailHelp" value="{{ proxy.stop_date }}">
+              </div>
+               <div class="mb-3">
+                <label for="fp_name_input" class="form-label">Дата старта</label>
+                <input type="text" class="form-control"  name="start_date_input" id="start_date_input" aria-describedby="emailHelp" value="{{ proxy.start_date }}">
+              </div>
+
+              <tr> <td> <label for="proxy_name">Код подсистемы:</label></td> <td><input type="text" id="proxy_name" name="proxy_name" value="{{ proxy.proxy_name }}"><br><br></td> </tr>
                   <tr> <td> <label for="fp_name">Код подсистемы:</label></td> <td><input type="text" id="fp_name" name="fp_name" value="{{ proxy.fp_name }}"><br><br></td> </tr>
                   <tr> <td> <label for="project">Имя подсистемы:</label></td> <td><br><br></td> </tr>
                   <tr> <td> <label for="author">Автор:</label></td> <td><input type="text" id="author" name="author" value="{{ proxy.author }}"><br><br>

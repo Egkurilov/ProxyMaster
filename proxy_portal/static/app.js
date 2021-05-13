@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var groupColumn = 3;
+    var groupColumn = 2;
     var table = $('#index-table').DataTable({
         "columnDefs": [
             { "visible": false, "targets": groupColumn }
@@ -12,8 +12,6 @@ $(document).ready(function() {
         "columns": [
             null,
             null,
-            null,
-            {"width": "0px"},
             {"width": "0px"},
             null,
             {"width": "120px"},
@@ -25,7 +23,7 @@ $(document).ready(function() {
 		"render": function(data, type, row) {
 			return(data == 'False' ? "<span class='text-danger'>DOWN</span>" : "<span class='text-success'>UP</span>");
 		},
-		"targets": 8
+		"targets": 6
 	}],
         "displayLength": 25,
         "drawCallback": function ( settings ) {

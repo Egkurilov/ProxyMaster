@@ -1,31 +1,27 @@
 from datetime import datetime
 
-from django.db.models import Max
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from random import randrange
+
 # Create your views here.
 from django.template import loader
 from django.views.generic import ListView, DetailView
 from .utils import proxy_run, proxy_kill
-from .models import ProxyList
+from .models import ProxyList, ProjectList
 
 
 class HomePageView(ListView):
     model = ProxyList
     template_name = 'index.html'
-
     context_object_name = 'all_proxy_list'
+    queryset = ProxyList.objects.all()
+    template_name = "index.html"
 
-def main_view(request):
-    proxylist = ProxyList()
-    if request.POST:
-        print(ProxyList.objects.aggregate(Max('proxy_port_in')))
-        proxylist.save()
-    date_now = datetime.now()
-    formated_date = date_now.strftime("%Y.%m.%d %H:%M")
-
-    return render(request, "add_entry.html", {'formated_date': formated_date})
+    def get_context_data(self, **kwargs):
+        project_list = ProjectList.objects.values('id', 'project_name').all
+        context = super(HomePageView, self).get_context_data(**kwargs)
+        context['project_list'] = project_list
+        return context
 
 
 def start_proxy(request, pk):
@@ -33,16 +29,13 @@ def start_proxy(request, pk):
     pid = proxy_run(str(query_result[0]['proxy_port_in']), str(query_result[0]['proxy_port_out']))
     ProxyList.objects.values().filter(id=pk).update(proxy_pid=pid)
     ProxyList.objects.values().filter(id=pk).update(status=True)
-
     return redirect('home')
 
 
 def stop_proxy(request, pk):
     query_result = ProxyList.objects.values('proxy_pid').filter(id=pk)
     proxy_kill(str(query_result[0]['proxy_pid']))
-
     ProxyList.objects.values().filter(id=pk).update(proxy_pid=0, status=False)
-    # ProxyList.objects.filter(id=pk).update(status=False)
     return redirect('home')
 
 
@@ -59,13 +52,34 @@ def edit_proxy(request, pk):
 
 def add_entry_view(request):
     if request.POST:
-        print("POST")
+        project_name = request.POST.get('project_name_input')
+        proxy_name = request.POST.get('proxy_name_input')
+        fp_name = request.POST.get('fp_name_input')
+        proxy_port_out = request.POST.get('proxy_port_out_input')
+        stop_date = request.POST.get('stop_date_input')
+        start_date = request.POST.get('start_date_input')
+
+        query_result = ProxyList.objects.latest('proxy_port_in').proxy_port_in
+
+        ProxyList.objects.create(
+            project_id=project_name,
+            proxy_name=proxy_name,
+            fp_name=fp_name,
+            proxy_port_in=query_result+1,
+            proxy_port_out=proxy_port_out,
+            stop_date=datetime.strptime(stop_date, '%d.%m.%Y %H:%M').strftime('%Y-%m-%d %H:%M:%S.000000'),
+            start_date=datetime.strptime(start_date, '%d.%m.%Y %H:%M').strftime('%Y-%m-%d %H:%M:%S.000000'),
+        )
     return redirect('home')
 
 
 def add_project_view(request):
     if request.POST:
-        print("POST")
+        new_project = request.POST.get('project_name')
+        if new_project is not None:
+            ProjectList.objects.create(project_name=new_project)
+
+        print("POST add_project_view")
     return redirect('home')
 
 
