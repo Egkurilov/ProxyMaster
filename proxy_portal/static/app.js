@@ -1,8 +1,9 @@
 $(document).ready(function() {
     var groupColumn = 2;
     var table = $('#index-table').DataTable({
+        "ajax": '/json/',
         "columnDefs": [
-            { "visible": false, "targets": groupColumn }
+            { "visible": false, "targets": [2] }
         ],
         "bInfo" : false,
         //"bLengthChange" : false,
@@ -21,7 +22,8 @@ $(document).ready(function() {
         ],
         columnDefs: [{
 		"render": function(data, type, row) {
-			return(data == 'False' ? "<span class='text-danger'>DOWN</span>" : "<span class='text-success'>UP</span>");
+
+			return(data === false ? "<span class='text-danger'>DOWN</span>" : "<span class='text-success'>UP</span>");
 		},
 		"targets": 6
 	}],
@@ -60,4 +62,36 @@ $('#start_date_input, #stop_date_input').inputmask('datetime', {
             table.order( [ groupColumn, 'asc' ] ).draw();
         }
     } );
+
+    $(document).on('click', '.start-proxy ', function(){
+    $this = $(this);
+    $.get(`/start/${$this.data('id')}/`, function(data, textStatus, xhr) {
+    if (data.status === true) {
+        $this.parent().parent().prev().html("<span class='text-success'>UP</span>")
+    }
+    else {
+        $this.parent().parent().prev().html("<span className='text-danger'>DOWN</span>")
+    }
+    }, 'json');
+
+  });
+    $(document).on('click', '.stop-proxy ', function(){
+    $this = $(this);
+    $.get(`/stop/${$this.data('id')}/`, function(data, textStatus, xhr) {
+    if (data.status === true) {
+        $this.parent().parent().prev().html("<span class='text-danger'>DOWN</span>")
+    }
+
+    }, 'json');
+
+  });
+        function update() {
+
+        setTimeout(function() {
+            table.ajax.reload(null, false);
+            update();
+        }, 5000);
+    }
+
+    update();
 } );

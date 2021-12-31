@@ -1,2 +1,2 @@
 #!/bin/bash
-proxy http -T tcp -p ":$1" -P "0.0.0.0:$2" --daemon --forever --log $3.log
+./proxy tcp -P "$1" -p ":$2" -T tcp --kcp-mode=fast3 --kcp-nocomp --daemon

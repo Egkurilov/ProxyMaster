@@ -25,7 +25,7 @@ SECRET_KEY = '^r4hik6of!!sa75lhdnt7izm+(w%et+yiw()w$y$m*#^jc-%^#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -49,7 +49,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 
 ROOT_URLCONF = 'ProxyMaster.urls'
 
@@ -110,7 +109,6 @@ LANGUAGE_CODE = 'ru-ru'
 
 
 TIME_ZONE = 'Europe/Moscow'
-
 USE_I18N = True
 
 USE_L10N = True

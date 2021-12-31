@@ -3,3 +3,12 @@ tr.group:hover {
     background-color: #ddd !important;
     font-weight: 700;
 }
+table tr td:nth-child(3) {
+    display: none!important;
+}
+table tr {
+    text-align: center!important;
+}
+table tr.group {
+    text-align: left!important;
+}

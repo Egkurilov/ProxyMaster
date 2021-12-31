@@ -1,0 +1,1 @@
+nohup python3 ProxyMaster_manage.py runserver 0.0.0.0:10001 1>>nohup.out 2>&1 &
