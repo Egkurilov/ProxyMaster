@@ -12,6 +12,14 @@ class ProjectList(models.Model):
         return self.project_name[:50]
 
 
+class ProxySettings(models.Model):
+    proxy_name = models.CharField(max_length=255)
+    proxy_value = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.proxy_name[:50]
+
+
 class ProxyList(models.Model):
     id = models.BigAutoField(primary_key=True)
     proxy_id = models.IntegerField(default=1)

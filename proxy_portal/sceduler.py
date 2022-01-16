@@ -7,9 +7,7 @@ from proxy_portal.views import start_proxy, stop_proxy
 def pr():
     while True:
         datetime_now = datetime.now().strftime("%Y-%m-%d %H:%M")
-
         query_result = ProxyList.objects.values('id', 'start_date', 'stop_date', 'proxy_id')
-        #print(query_result)
         for single_q in query_result:
             if str(single_q['start_date'])[:-3] == datetime_now:
                 print('start ID: ', single_q['id'])

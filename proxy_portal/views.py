@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.views.generic import ListView, DetailView
 from .utils import proxy_run, proxy_kill, check_proxy, proxy_status, check_all_proxy_status
-from .models import ProxyList, ProjectList
+from .models import ProxyList, ProjectList, ProxySettings
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -24,8 +24,10 @@ class HomePageView(ListView):
 
     def get_context_data(self, **kwargs):
         project_list = ProjectList.objects.values('id', 'project_name').all
+        proxy_settings = ProxySettings.objects.values('id', 'proxy_name', 'proxy_value').all
         context = super(HomePageView, self).get_context_data(**kwargs)
         context['project_list'] = project_list
+        context['proxy_settings'] = proxy_settings
         return context
 
 
@@ -143,11 +145,37 @@ def add_entry_view(request):
 
 # view для добавления нового проекта
 def add_project_view(request):
+    if request.GET:
+        print("THIS IS GET")
     if request.POST:
+
         new_project = request.POST.get('project_name')
         if new_project is not None:
             if new_project != 'CARDS':
                 ProjectList.objects.create(project_name=new_project)
+                projects_d = ProjectList.objects.values('id').get(project_name=new_project)
+
+                for proxy_name in request.POST.getlist('proxy_name'):
+                    print("proxy_name ", proxy_name)
+                    print("new_project ", new_project)
+                    proxy_port_out = ProxySettings.objects.values('proxy_value').get(proxy_name=proxy_name)
+
+                    try:
+                       last_port = ProxyList.objects.latest('proxy_port_in').proxy_port_in
+                    except ObjectDoesNotExist:
+                       last_port = 32000
+
+                    ProxyList.objects.create(
+
+                        project_id=projects_d['id'],
+                        proxy_name=proxy_name,
+                        proxy_port_in=last_port + 1,
+                        proxy_port_out=proxy_port_out['proxy_value'],
+                        stop_date="2001-01-01 00:00:00",
+                        start_date="2001-01-01 00:00:00",
+                    )
+                print("spacer")
+
     return redirect('home')
 
 
