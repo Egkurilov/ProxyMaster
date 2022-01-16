@@ -20,6 +20,9 @@ $(document).ready(function() {
             null,
             null,
         ],
+        "search": {
+        "search":  localStorage.getItem("search")
+        },
         columnDefs: [{
 		"render": function(data, type, row) {
 
@@ -94,4 +97,9 @@ $('#start_date_input, #stop_date_input').inputmask('datetime', {
     }
 
     update();
-} );
+
+$(`.dataTables_filter input[type="search"]`).keyup(function(e){
+localStorage.setItem("search", $(this).val());
+console.log($(`.dataTables_filter input[type="search"]`).val());
+});
+});

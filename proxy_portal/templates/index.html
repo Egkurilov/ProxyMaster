@@ -109,19 +109,16 @@
                     <label for="project_name" class="form-label">Имя проекта</label>
                     <input type="text" class="form-control" value="CARDS" name="project_name" id="project_name" aria-describedby="emailHelp">
                   </div>
-{#                      <div>#}
-{#                          <input type="text" class="form-control" value="{{ settings.proxy_name }} {{ settings.proxy_value }}" name="proxy_name" id="proxy_name" aria-describedby="emailHelp">#}
-{#                      </div>#}
     {#                      #}
     {% block content %}
         {% for settings in proxy_settings %}
             <div class="input-group mb-3">
-              <div class="input-group-prepend">
+
                 <div class="input-group-text">
                   <input type="checkbox" name="proxy_name" id="proxy_name" value="{{ settings.proxy_name }}" aria-label="Checkbox for following text input">
-                </div>
+
               </div>
-              <input type="text" class="form-control" value="{{ settings.proxy_name }}" aria-label="Text input with checkbox">
+              <input type="text" class="form-control" value="{{ settings.proxy_name }}" readonly aria-label="Text input with checkbox">
             </div>
           {% endfor %}
     {% endblock %}
